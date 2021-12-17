@@ -1,0 +1,6 @@
+/src/.vs/Parsec.GUI/v16/*.suo
+bin
+obj
+/src/Parsec.WinUI/*.user
+/src/.vs/Parsec.GUI/DesignTimeBuild/*.v2
+/src/Parsec.WPF/*.user
