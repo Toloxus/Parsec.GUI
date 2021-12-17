@@ -8,6 +8,7 @@ using Parsec.Core.WindowFactory;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Parsec.Core.About;
+using Parsec.Core.Workspace;
 
 namespace Parsec.Core.Main
 {
@@ -31,6 +32,7 @@ namespace Parsec.Core.Main
 
             ShowAboutCommand = new RelayCommand(ShowAbout);
             OpenSahCommand = new AsyncRelayCommand(OpenSah);
+            OpenWorkspaceCommand = new AsyncRelayCommand(OpenWorkspace);
 
             _loggingService.Info(this, $"Started app. Version: {_versionService.GetCurrentVersion()}. Parsec version: {_versionService.GetParsecVersion()}");
         }
@@ -39,11 +41,11 @@ namespace Parsec.Core.Main
 
         #region Properties
 
-        private bool _sahParced;
-        public bool SahParced
+        private WorkspaceViewModel _workspaceViewModel;
+        public WorkspaceViewModel WorkspaceViewModel
         {
-            get => _sahParced;
-            set => SetProperty(ref _sahParced, value);
+            get => _workspaceViewModel;
+            set => SetProperty(ref _workspaceViewModel, value);
         }
 
         #endregion
@@ -59,14 +61,30 @@ namespace Parsec.Core.Main
         public ICommand OpenSahCommand { get; }
         private async Task OpenSah()
         {
-            var path = await _fileDialog.Open(new string[2] { FileConstants.SAH_EXTENTION, FileConstants.SAH_EXTENTION.ToUpper() });
+            var path = await _fileDialog.OpenFile(new string[2] { FileConstants.SAH_EXTENTION, FileConstants.SAH_EXTENTION.ToUpper() });
             if (string.IsNullOrEmpty(path))
                 return; // Nothing was selected.
 
             _loggingService.Debug(this, $"Opening sah file from path {path}");
 
             var (parced, data) = await _parsecService.TryOpenSah(path);
-            SahParced = parced;
+            if (!parced)
+                return;
+
+            WorkspaceViewModel = new WorkspaceViewModel(_parsecService);
+            WorkspaceViewModel.Data = data;
+        }
+
+        public ICommand OpenWorkspaceCommand { get; }
+        private async Task OpenWorkspace()
+        {
+            var path = await _fileDialog.OpenFolder();
+            if (string.IsNullOrEmpty(path))
+                return; // Nothing was selected.
+
+            WorkspaceViewModel = new WorkspaceViewModel(_parsecService);
+            WorkspaceViewModel.Path = path;
+            WorkspaceViewModel.Load();
         }
 
         #endregion

@@ -6,16 +6,19 @@ namespace Parsec.Core.Logging
 {
     public class LoggingService : ILoggingService
     {
-        public LoggingService(string logFilePath)
+        public LoggingService(LoggerConfiguration config)
         {
-            if (File.Exists(logFilePath))
-                File.Delete(logFilePath);
+            if (config is null)
+                throw new ArgumentNullException(nameof(config));
 
-            var logConfiguration = new LoggerConfiguration()
-                                           .MinimumLevel.Verbose()
-                                           .WriteTo.Console()
-                                           .WriteTo.File(logFilePath);
-            Log.Logger = logConfiguration.CreateLogger();
+            Log.Logger = config.CreateLogger();
+        }
+
+        public static LoggerConfiguration GetDefaultConfig(string logFilePath)
+        {
+            return new LoggerConfiguration().MinimumLevel.Verbose()
+                                            .WriteTo.Console()
+                                            .WriteTo.File(logFilePath);
         }
 
         public void Debug(Type caller, string message, Exception exception = null)

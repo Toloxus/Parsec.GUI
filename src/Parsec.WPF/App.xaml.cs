@@ -13,6 +13,7 @@ using Parsec.Core.About;
 using Parsec.WPF.FilePicker;
 using Parsec.WPF.About;
 using Parsec.WPF.Main;
+using Serilog;
 
 namespace Parsec.WPF
 {
@@ -53,10 +54,23 @@ namespace Parsec.WPF
             var services = new ServiceCollection();
 
             // Setup services.
-            services.AddSingleton<ILoggingService, LoggingService>((p) => {
+            services.AddSingleton<ILoggingService, LoggingService>((p) =>
+            {
                 var logFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"Logs\Log.txt");
-                return new LoggingService(logFilePath);
+
+                // TODO: find better place.
+                if (File.Exists(logFilePath))
+                    File.Delete(logFilePath);
+
+                var config = LoggingService.GetDefaultConfig(logFilePath);
+
+                // Log to UI.
+                var window = p.GetService<MainWindow>();
+                config.WriteTo.RichTextBox(window.LogTextBox);
+
+                return new LoggingService(config);
             });
+
             services.AddSingleton<IWindowFactory, WpfFactory.WindowFactory>();
             services.AddSingleton<IFileDialog, FileDialog>();
             services.AddSingleton<IVersionService, VersionService>();

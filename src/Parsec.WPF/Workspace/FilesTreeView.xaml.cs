@@ -1,5 +1,4 @@
-﻿using Parsec.Core.Main;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Parsec.WPF.Main
+namespace Parsec.WPF.Workspace
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for FilesTreeView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FilesTreeView : UserControl
     {
-        public MainWindow()
+        public FilesTreeView()
         {
             InitializeComponent();
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            DataContext = (Application.Current as App).Services.GetService(typeof(MainViewModel));
         }
     }
 }

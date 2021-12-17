@@ -8,7 +8,7 @@ namespace Parsec.WinUI.FilePicker
 {
     public class FileDialog : IFileDialog
     {
-        public async Task<string> Open(IEnumerable<string> extensions)
+        public async Task<string> OpenFile(IEnumerable<string> extensions)
         {
             // File picker has still some issues, see:
             // https://github.com/microsoft/microsoft-ui-xaml/issues/2716#issuecomment-727043010

@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Parsec.WPF.ImportSah
+namespace Parsec.WPF.Workspace
 {
     /// <summary>
-    /// Interaction logic for ImportSahView.xaml
+    /// Interaction logic for WorkspaceView.xaml
     /// </summary>
-    public partial class ImportSahView : UserControl
+    public partial class WorkspaceView : UserControl
     {
-        public ImportSahView()
+        public WorkspaceView()
         {
             InitializeComponent();
         }

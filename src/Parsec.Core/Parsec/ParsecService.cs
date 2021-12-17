@@ -37,5 +37,29 @@ namespace Parsec.Core.Parsec
 
             return (ok, data);
         }
+
+        public async Task<bool> TryExtractSaf(string path, Data data)
+        {
+            bool ok = false;
+
+            await Task.Run(() =>
+            {
+                try
+                {
+                    _loggingService.Info(this, $"Extracting saf. Be patient...");
+                    data.ExtractAll(path);
+
+                    _loggingService.Info(this, $"Successfully extracted to {path}.");
+                    ok = true;
+                }
+                catch (Exception ex)
+                {
+                    _loggingService.Error(this, $"Failed to export .saf", ex);
+                    ok = false;
+                }
+            });
+
+            return ok;
+        }
     }
 }
