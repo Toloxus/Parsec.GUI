@@ -37,6 +37,17 @@ namespace Parsec.Core.Main
 
         #endregion
 
+        #region Properties
+
+        private bool _sahParced;
+        public bool SahParced
+        {
+            get => _sahParced;
+            set => SetProperty(ref _sahParced, value);
+        }
+
+        #endregion
+
         #region Commands
 
         public ICommand ShowAboutCommand { get; }
@@ -53,7 +64,9 @@ namespace Parsec.Core.Main
                 return; // Nothing was selected.
 
             _loggingService.Debug(this, $"Opening sah file from path {path}");
-            // TODO: parse sah.
+
+            var (parced, data) = await _parsecService.TryOpenSah(path);
+            SahParced = parced;
         }
 
         #endregion

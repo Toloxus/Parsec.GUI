@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Parsec.WPF
+namespace Parsec.WPF.Main
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

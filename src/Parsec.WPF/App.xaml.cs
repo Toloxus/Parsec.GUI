@@ -12,6 +12,7 @@ using System.IO;
 using Parsec.Core.About;
 using Parsec.WPF.FilePicker;
 using Parsec.WPF.About;
+using Parsec.WPF.Main;
 
 namespace Parsec.WPF
 {

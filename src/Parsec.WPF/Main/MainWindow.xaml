@@ -1,13 +1,14 @@
-﻿<Window x:Class="Parsec.WPF.MainWindow"
+﻿<Window x:Class="Parsec.WPF.Main.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Parsec.WPF"
+        xmlns:local="clr-namespace:Parsec.WPF.Main"
+        xmlns:importsah="clr-namespace:Parsec.WPF.ImportSah"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
-    <StackPanel>
+    <Grid>
         <Menu>
             <MenuItem Header="File">
                 <MenuItem Header="Open SAH..." Command="{Binding OpenSahCommand}" />
@@ -18,5 +19,7 @@
             </MenuItem>
         </Menu>
 
-    </StackPanel>
+        <importsah:ImportSahView Visibility="{Binding SahParced, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+    </Grid>
 </Window>

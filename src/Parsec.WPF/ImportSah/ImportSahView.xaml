@@ -1,0 +1,11 @@
+﻿<UserControl x:Class="Parsec.WPF.ImportSah.ImportSahView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Parsec.WPF.ImportSah"
+             mc:Ignorable="d">
+    <Grid>
+        <TextBlock>We could parse your sah. Where do you want to create workspace?</TextBlock>
+    </Grid>
+</UserControl>

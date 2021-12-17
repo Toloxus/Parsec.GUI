@@ -1,6 +1,6 @@
-﻿//using Parsec.Shaiya.Svmap;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Reflection;
+using Parsec.Shaiya.Data;
 
 namespace Parsec.Core.Version
 {
@@ -13,7 +13,7 @@ namespace Parsec.Core.Version
 
         public string GetParsecVersion()
         {
-            return "Parsec .net standard 2.0";//FileVersionInfo.GetVersionInfo(Assembly.GetAssembly(typeof(Svmap)).Location).ProductVersion;
+            return FileVersionInfo.GetVersionInfo(Assembly.GetAssembly(typeof(Data)).Location).ProductVersion;
         }
     }
 }
