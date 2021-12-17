@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Parsec.WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Parsec.WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

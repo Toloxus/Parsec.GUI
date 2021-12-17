@@ -1,0 +1,22 @@
+﻿<Window
+    x:Class="Parsec.WinUI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d">
+    <Grid x:Name="root">
+        <StackPanel>
+            <controls:MenuBar>
+                <controls:MenuBarItem Title="File">
+                    <MenuFlyoutItem Text="Open SAH..." Command="{Binding OpenSahCommand}"/>
+                </controls:MenuBarItem>
+                
+                <controls:MenuBarItem Title="Help" HorizontalAlignment="Right">
+                    <MenuFlyoutItem Text="About" Command="{Binding ShowAboutCommand}"/>
+                </controls:MenuBarItem>
+            </controls:MenuBar>
+        </StackPanel>
+    </Grid>
+</Window>
