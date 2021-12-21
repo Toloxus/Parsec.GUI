@@ -8,9 +8,10 @@
     <Product>Parsec</Product>
     <RepositoryUrl>https://github.com/aosyatnik/Parsec.GUI</RepositoryUrl>
     <PackageProjectUrl>https://github.com/aosyatnik/Parsec.GUI</PackageProjectUrl>
-    <SignAssembly>false</SignAssembly>
+    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>MyKey.pfx</AssemblyOriginatorKeyFile>
     <Authors>Parsec Team</Authors>
+    <PackageId>Parsec</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
