@@ -22,17 +22,21 @@ namespace Parsec.Core.Main
 
         #region Constructor
 
-        public MainViewModel(ILoggingService loggingService, IWindowFactory windowFactory, IFileDialog fileDialog, IParsecService parsecService, IVersionService versionService)
+        public MainViewModel(ILoggingService loggingService, IWindowFactory windowFactory, IFileDialog fileDialog, IParsecService parsecService, IVersionService versionService, WorkspaceViewModel workspace)
         {
             _loggingService = loggingService;
             _windowFactory = windowFactory;
             _fileDialog = fileDialog;
             _parsecService = parsecService;
             _versionService = versionService;
+            _workspaceViewModel = workspace;
 
             ShowAboutCommand = new RelayCommand(ShowAbout);
             OpenSahCommand = new AsyncRelayCommand(OpenSah);
-            OpenWorkspaceCommand = new AsyncRelayCommand(OpenWorkspace);
+            ExractWorkspaceCommand = new AsyncRelayCommand(ExractWorkspace, CanExractWorkspace);
+            CollapseAllCommand = new RelayCommand(CollapseAll);
+
+            _workspaceViewModel.IsExtractingChanged += (extracting) => ((AsyncRelayCommand)ExractWorkspaceCommand).NotifyCanExecuteChanged();
 
             _loggingService.Info(this, $"Started app. Version: {_versionService.GetCurrentVersion()}. Parsec version: {_versionService.GetParsecVersion()}");
         }
@@ -41,11 +45,10 @@ namespace Parsec.Core.Main
 
         #region Properties
 
-        private WorkspaceViewModel _workspaceViewModel;
+        private readonly WorkspaceViewModel _workspaceViewModel;
         public WorkspaceViewModel WorkspaceViewModel
         {
             get => _workspaceViewModel;
-            set => SetProperty(ref _workspaceViewModel, value);
         }
 
         #endregion
@@ -71,20 +74,30 @@ namespace Parsec.Core.Main
             if (!parced)
                 return;
 
-            WorkspaceViewModel = new WorkspaceViewModel(_parsecService);
             WorkspaceViewModel.Data = data;
+            WorkspaceViewModel.LoadFilesTree();
+            ((AsyncRelayCommand)ExractWorkspaceCommand).NotifyCanExecuteChanged();
         }
 
-        public ICommand OpenWorkspaceCommand { get; }
-        private async Task OpenWorkspace()
+        public ICommand ExractWorkspaceCommand { get; }
+        private async Task ExractWorkspace()
         {
             var path = await _fileDialog.OpenFolder();
             if (string.IsNullOrEmpty(path))
                 return; // Nothing was selected.
 
-            WorkspaceViewModel = new WorkspaceViewModel(_parsecService);
-            WorkspaceViewModel.Path = path;
-            WorkspaceViewModel.Load();
+            await WorkspaceViewModel.ExtractCommand.ExecuteAsync(path);
+        }
+
+        private bool CanExractWorkspace()
+        {
+            return WorkspaceViewModel.IsReady && !WorkspaceViewModel.IsExtracting;
+        }
+
+        public ICommand CollapseAllCommand { get; }
+        private void CollapseAll()
+        {
+            WorkspaceViewModel.CollapseAll();
         }
 
         #endregion

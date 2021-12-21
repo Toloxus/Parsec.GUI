@@ -7,14 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <local:EmptyView Visibility="{Binding ., Mode=OneWay, Converter={StaticResource NullVisibilityConverter}, ConverterParameter=True}"
+        <local:EmptyView Visibility="{Binding IsReady, Converter={StaticResource InverseBooleanToVisibilityConverter}}"
                          HorizontalAlignment="Center"
                          VerticalAlignment="Center" />
 
-        <local:ImportSahView Visibility="{Binding ., Mode=OneWay, Converter={StaticResource NullVisibilityConverter}}"
+        <local:ImportSahView Visibility="{Binding IsOpeningSah, Converter={StaticResource BooleanToVisibilityConverter}}"
                              HorizontalAlignment="Center"
                              VerticalAlignment="Center" />
 
-        <local:FilesTreeView Visibility="{Binding ., Mode=OneWay, Converter={StaticResource NullVisibilityConverter}}" />
+        <local:FilesTreeView Visibility="{Binding IsReady, Converter={StaticResource BooleanToVisibilityConverter}}" />
     </Grid>
 </UserControl>

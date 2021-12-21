@@ -7,4 +7,5 @@
     <converters:InverseBooleanConverter x:Key="InverseBooleanConverter" />
     <converters:FileToIconConverter x:Key="FileToIconConverter" />
     <converters:FileToColorConverter x:Key="FileToColorConverter" />
+    <converters:InverseBooleanToVisibilityConverter x:Key="InverseBooleanToVisibilityConverter" />
 </ResourceDictionary>

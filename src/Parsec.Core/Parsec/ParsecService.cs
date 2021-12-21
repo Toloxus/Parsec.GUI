@@ -46,7 +46,7 @@ namespace Parsec.Core.Parsec
             {
                 try
                 {
-                    _loggingService.Info(this, $"Extracting saf. Be patient...");
+                    _loggingService.Info(this, $"Extracting saf to {path}. Be patient...");
                     data.ExtractAll(path);
 
                     _loggingService.Info(this, $"Successfully extracted to {path}.");

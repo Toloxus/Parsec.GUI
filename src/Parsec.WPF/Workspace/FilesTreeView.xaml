@@ -7,8 +7,10 @@
              xmlns:core="clr-namespace:Parsec.Core.Workspace;assembly=Parsec.Core"
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d">
-    <Grid Visibility="{Binding IsReady, Converter={StaticResource BooleanToVisibilityConverter}}">
-        <TreeView ItemsSource="{Binding FilesTree}">
+    <Grid>
+        <TreeView ItemsSource="{Binding FilesTree}"
+                  VirtualizingStackPanel.IsVirtualizing="True"
+                  VirtualizingStackPanel.VirtualizationMode="Recycling">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type core:FileViewModel}" ItemsSource="{Binding Children}">
                     <StackPanel Orientation="Horizontal">
@@ -20,6 +22,10 @@
                         <TextBlock Text="{Binding Name}" />
                     </StackPanel>
                 </HierarchicalDataTemplate>
+
+                <Style TargetType="{x:Type TreeViewItem}">
+                    <Setter Property="IsExpanded" Value="{Binding IsExpanded, Mode=TwoWay}"/>
+                </Style>
             </TreeView.Resources>
         </TreeView>
     </Grid>

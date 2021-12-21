@@ -2,9 +2,8 @@
 using Microsoft.Toolkit.Mvvm.Input;
 using Parsec.Core.Parsec;
 using Parsec.Shaiya.Data;
+using System;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Parsec.Core.Workspace
@@ -18,7 +17,7 @@ namespace Parsec.Core.Workspace
         {
             _parsecService = parsecService;
 
-            ExtractSafCommand = new AsyncRelayCommand(ExtractSaf);
+            ExtractCommand = new AsyncRelayCommand<string>(Extract);
         }
 
         #endregion
@@ -29,25 +28,26 @@ namespace Parsec.Core.Workspace
         public Data Data
         {
             get => _data;
-            set
-            {
-                _data = value;
-                Path = System.IO.Path.GetDirectoryName(_data.Sah.Path);
-            }
-        }
-
-        private string _path;
-        public string Path
-        {
-            get => _path;
-            set => SetProperty(ref _path, value);
+            set => _data = value;
         }
 
         private bool _isExtracting;
         public bool IsExtracting
         {
             get => _isExtracting;
-            set => SetProperty(ref _isExtracting, value);
+            set
+            {
+                SetProperty(ref _isExtracting, value);
+                IsExtractingChanged?.Invoke(_isExtracting);
+            }
+        }
+        public event Action<bool> IsExtractingChanged;
+
+        private bool _isOpeningSah;
+        public bool IsOpeningSah
+        {
+            get => _isOpeningSah;
+            set => SetProperty(ref _isOpeningSah, value);
         }
 
         private bool _isReady;
@@ -63,50 +63,35 @@ namespace Parsec.Core.Workspace
 
         #region Commands
 
-        public AsyncRelayCommand ExtractSafCommand { get; }
-        private async Task ExtractSaf()
+        public AsyncRelayCommand<string> ExtractCommand { get; }
+        private async Task Extract(string path)
         {
             IsExtracting = true;
 
-            var extracted = await _parsecService.TryExtractSaf(Path, _data);
+            await _parsecService.TryExtractSaf(path, _data);
+
             IsExtracting = false;
-
-            if (!extracted)
-                return;
-
-            Load();
         }
 
         /// <summary>
         /// Loads files from workspace.
         /// </summary>
-        public void Load()
+        public void LoadFilesTree()
         {
-            var root = new FileViewModel(Path);
-            LoadFolder(root);
+            IsOpeningSah = true;
 
-            foreach (var child in root.Children)
-                FilesTree.Add(child);
+            var rootVM = new FileViewModel(_data.Sah.RootFolder);
+            foreach (var fileVM in rootVM.Children)
+                FilesTree.Add(fileVM);
 
-            IsReady = true;
+            IsOpeningSah = false;
+            IsReady = FilesTree.Count > 0;
         }
 
-        /// <summary>
-        /// Recursive load folders and files.
-        /// </summary>
-        private void LoadFolder(FileViewModel vm)
+        public void CollapseAll()
         {
-            var folders = Directory.GetDirectories(vm.Path).OrderBy(x => x);
-            foreach (var path in folders)
-            {
-                var folder = new FileViewModel(path);
-                vm.Children.Add(folder);
-                LoadFolder(folder);
-            }
-
-            var files = Directory.GetFiles(vm.Path).OrderBy(x => x);
-            foreach (var path in files)
-                vm.Children.Add(new FileViewModel(path));
+            foreach (var f in FilesTree)
+                f.Collapse();
         }
 
         #endregion

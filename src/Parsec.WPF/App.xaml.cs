@@ -14,6 +14,7 @@ using Parsec.WPF.FilePicker;
 using Parsec.WPF.About;
 using Parsec.WPF.Main;
 using Serilog;
+using Parsec.Core.Workspace;
 
 namespace Parsec.WPF
 {
@@ -79,6 +80,7 @@ namespace Parsec.WPF
             // Setup view models.
             services.AddSingleton<AboutViewModel>();
             services.AddSingleton<MainViewModel>();
+            services.AddSingleton<WorkspaceViewModel>();
 
             // Setup windows.
             services.AddSingleton<MainWindow>();

@@ -7,16 +7,10 @@
              xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d">
     <StackPanel>
-        <TextBlock>We could parse your sah! Where do you want to create workspace?</TextBlock>
-        <TextBox Text="{Binding Path, Mode=TwoWay}" IsEnabled="{Binding IsExtracting, Converter={StaticResource InverseBooleanConverter}}" />
-        <Button Margin="0,40,0,0" Command="{Binding ExtractSafCommand}" IsEnabled="{Binding IsExtracting, Converter={StaticResource InverseBooleanConverter}}">Start extract!</Button>
-        
-        <TextBlock Visibility="{Binding IsExtracting, Converter={StaticResource BooleanToVisibilityConverter}}"
-                   Margin="0,20,0,0">
+        <TextBlock Margin="0,20,0,0">
             Hint: Extract might take some time. Relax and make some coffee...
         </TextBlock>
-        <fa:ImageAwesome Visibility="{Binding IsExtracting, Converter={StaticResource BooleanToVisibilityConverter}}"
-                         Icon="Refresh"
+        <fa:ImageAwesome Icon="Refresh"
                          Spin="True"
                          Height="20"
                          Width="20" />

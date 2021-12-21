@@ -6,10 +6,8 @@
              xmlns:local="clr-namespace:Parsec.WPF.Workspace"
              mc:Ignorable="d">
     <StackPanel>
-        <TextBlock>There is no selected workspace yet.</TextBlock>
+        <TextBlock>There is no selected file yet.</TextBlock>
         <TextBlock>Please start with</TextBlock>
         <TextBlock>File > Import SAH...</TextBlock>
-        <TextBlock>or</TextBlock>
-        <TextBlock>File > Open Workspace...</TextBlock>
     </StackPanel>
 </UserControl>

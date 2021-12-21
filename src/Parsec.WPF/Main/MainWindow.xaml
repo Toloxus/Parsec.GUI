@@ -12,29 +12,34 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="2*" />
+            <RowDefinition Height="5" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Menu Grid.Row="0">
             <MenuItem Header="File">
                 <MenuItem Header="Import SAH..." Command="{Binding OpenSahCommand}" />
-                <MenuItem Header="Open Workspace..." Command="{Binding OpenWorkspaceCommand}" />
+                <MenuItem Header="Extract to workspace..." Command="{Binding ExractWorkspaceCommand}" />
             </MenuItem>
 
-            <MenuItem Header="Help" HorizontalAlignment="Right">
+            <MenuItem Header="View">
+                <MenuItem Header="Collapse all" Command="{Binding CollapseAllCommand}" />
+            </MenuItem>
+
+            <MenuItem Header="Help">
                 <MenuItem Header="About" Command="{Binding ShowAboutCommand}" />
             </MenuItem>
         </Menu>
 
         <workspace:WorkspaceView Grid.Row="1" DataContext="{Binding WorkspaceViewModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
 
-        <RichTextBox Grid.Row="2"
+        <GridSplitter Grid.Row="2" Height="5" HorizontalAlignment="Stretch" />
+
+        <RichTextBox Grid.Row="3"
                      x:Name="LogTextBox"
                      Background="Black"
                      Foreground="LightGray"
                      FontFamily="Cascadia Mono, Consolas, Courier New, monospace"
-                     VerticalScrollBarVisibility="Auto"
-                     MinHeight="100px"
-                     MaxHeight="300px" />
+                     VerticalScrollBarVisibility="Auto" />
     </Grid>
 </Window>
