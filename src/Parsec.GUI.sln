@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parsec.Core", "Parsec.Core\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parsec.UWP", "Parsec.UWP\Parsec.UWP.csproj", "{C4E09490-92AA-4AD0-94DB-D4DCCED64ADF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Parsec", "..\..\Parsec\src\Parsec\Parsec.csproj", "{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -113,26 +111,6 @@ Global
 		{C4E09490-92AA-4AD0-94DB-D4DCCED64ADF}.Release|x86.ActiveCfg = Release|x86
 		{C4E09490-92AA-4AD0-94DB-D4DCCED64ADF}.Release|x86.Build.0 = Release|x86
 		{C4E09490-92AA-4AD0-94DB-D4DCCED64ADF}.Release|x86.Deploy.0 = Release|x86
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Debug|ARM.ActiveCfg = Debug|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Debug|ARM.Build.0 = Debug|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Debug|arm64.ActiveCfg = Debug|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Debug|arm64.Build.0 = Debug|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Debug|x64.Build.0 = Debug|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Debug|x86.ActiveCfg = Debug|x86
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Debug|x86.Build.0 = Debug|x86
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Release|ARM.ActiveCfg = Release|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Release|ARM.Build.0 = Release|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Release|arm64.ActiveCfg = Release|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Release|arm64.Build.0 = Release|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Release|x64.ActiveCfg = Release|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Release|x64.Build.0 = Release|Any CPU
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Release|x86.ActiveCfg = Release|x86
-		{EDBEDEC5-F38B-476B-B5AE-5544BE700C38}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
