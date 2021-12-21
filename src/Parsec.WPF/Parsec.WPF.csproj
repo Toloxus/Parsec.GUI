@@ -11,7 +11,8 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>MyKey.pfx</AssemblyOriginatorKeyFile>
     <Authors>Parsec Team</Authors>
-    <PackageId>Parsec</PackageId>
+    <PackageId>Parsec UI</PackageId>
+    <DelaySign>false</DelaySign>
   </PropertyGroup>
 
   <ItemGroup>
