@@ -40,8 +40,9 @@ jobs:
 
     - name: Publish
       run: dotnet publish ${{ env.PROJECT_PATH }} -c ${{ matrix.configuration }} --no-build
+
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
       with:
         name: Artifacts
-        path: ${{ env.PROJECT_PATH }}\bin\Release\net5.0-windows\win-x64\publish\*.exe
+        path: src\Parsec.WPF\bin\Release\net5.0-windows\win-x64\publish\*.exe
