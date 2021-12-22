@@ -39,8 +39,7 @@ jobs:
       run: dotnet build ${{ env.PROJECT_PATH }} -c ${{ matrix.configuration }} --no-restore
 
     - name: Publish
-      run: dotnet publish ${{ env.PROJECT_PATH }} -c ${{ matrix.configuration }} --no-buildfiguration: ${{ matrix.configuration }}
-
+      run: dotnet publish ${{ env.PROJECT_PATH }} -c ${{ matrix.configuration }} --no-build
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
       with:
