@@ -4,3 +4,4 @@ obj
 /src/Parsec.WinUI/*.user
 /src/.vs/Parsec.GUI/DesignTimeBuild/*.v2
 /src/Parsec.WPF/*.user
+/src/Parsec.WPF/publish
