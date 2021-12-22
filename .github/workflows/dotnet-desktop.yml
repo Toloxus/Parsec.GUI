@@ -41,6 +41,16 @@ jobs:
     - name: Publish
       run: dotnet publish ${{ env.PROJECT_PATH }} -c ${{ matrix.configuration }} --no-build
 
+    - name: Create Code Signing Certificate
+      run: |
+        New-Item -ItemType directory -Path certificate
+        Set-Content -Path certificate\certificate.txt -Value '${{ secrets.CERTIFICATE }}'
+        certutil -decode certificate\certificate.txt certificate\certificate.pfx
+
+    - name: Code Sign 2021
+        run: |
+          & 'C:/Program Files (x86)/Windows Kits/10/bin/10.0.17763.0/x86/signtool.exe' sign /f certificate\certificate.pfx /p '${{ secrets.CERTIFICATE_PASS }}' /t http://timestamp.comodoca.com/authenticode src\Parsec.WPF\bin\Release\net5.0-windows\win-x64\publish\*.exe
+
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
       with:
